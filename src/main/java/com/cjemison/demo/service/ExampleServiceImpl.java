@@ -30,7 +30,8 @@ public class ExampleServiceImpl implements ExampleService {
   @SuppressWarnings("unchecked")
   public Observable<String> findAllObservable(final int cnt) {
     logger.info("started");
-    Observable<String> observable = new ExampleObserverCommand("exampleGroup", cnt).observe();
+    // using a cold observer.
+    Observable<String> observable = new ExampleObserverCommand("exampleGroup", cnt).toObservable();
     logger.debug("done");
     return observable;
   }
