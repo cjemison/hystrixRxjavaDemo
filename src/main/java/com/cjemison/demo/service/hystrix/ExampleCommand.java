@@ -19,7 +19,7 @@ public class ExampleCommand extends HystrixCommand<List<String>> {
   private String name;
 
   public ExampleCommand(final String name) {
-    super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
+    super(HystrixCommandGroupKey.Factory.asKey(name));
     this.name = name;
   }
 
@@ -27,7 +27,7 @@ public class ExampleCommand extends HystrixCommand<List<String>> {
   protected List<String> run() throws Exception {
     logger.info("started");
 
-    List<String> list = IntStream.range(0, 1000000).boxed().map(c -> UUID.randomUUID().toString()
+    List<String> list = IntStream.range(0, 1000).boxed().map(c -> UUID.randomUUID().toString()
     ).collect
           (Collectors.toList());
 

@@ -6,10 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -40,4 +42,25 @@ public class ExampleControllerImpl implements ExampleController {
     logger.info("done");
     return deferredResult;
   }
+
+  @Override
+  @RequestMapping(value = "example/{cnt}")
+  public DeferredResult<?> findAll(@PathVariable("cnt") final int cnt) {
+    return createDeferredResult(exampleService.findAllObservable(cnt));
+  }
+
+  private List<String> createList(final Observable<String> listObservable) {
+    logger.info("started");
+    List<String> stringList = new ArrayList<>();
+    listObservable.subscribe(stringList::add);
+    logger.info("done");
+    return stringList;
+  }
+
+  private DeferredResult<ResponseEntity<?>> createDeferredResult(Observable<String> observable) {
+    DeferredResult<ResponseEntity<?>> deferredResult = new DeferredResult<>();
+    deferredResult.setResult(ResponseEntity.ok(createList(observable)));
+    return deferredResult;
+  }
+
 }

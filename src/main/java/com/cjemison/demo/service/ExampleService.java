@@ -11,4 +11,6 @@ public interface ExampleService {
 
   Observable<List<String>> findAll();
 
+  Observable<String> findAllObservable(final int count);
+
 }

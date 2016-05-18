@@ -8,4 +8,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 public interface ExampleController {
 
   DeferredResult<?> findAll();
+
+  DeferredResult<?> findAll(final int cnt);
+
 }
