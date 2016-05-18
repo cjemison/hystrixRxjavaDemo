@@ -21,6 +21,7 @@ public class ExampleServiceImpl implements ExampleService {
   @Override
   public Observable<List<String>> findAll() {
     logger.info("started");
+    // async call with a cold observer
     Observable<List<String>> observable = new ExampleCommand("Cornelius").toObservable();
     logger.debug("done");
     return observable;
@@ -30,7 +31,7 @@ public class ExampleServiceImpl implements ExampleService {
   @SuppressWarnings("unchecked")
   public Observable<String> findAllObservable(final int cnt) {
     logger.info("started");
-    // using a cold observer.
+    // synchronous call with a cold observer
     Observable<String> observable = new ExampleObserverCommand("exampleGroup", cnt).toObservable();
     logger.debug("done");
     return observable;
