@@ -1,6 +1,6 @@
 package com.cjemison.demo.service;
 
-import com.cjemison.demo.service.hystrix.LookupCommand;
+import com.cjemison.demo.service.hystrix.ExampleCommand;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class ExampleServiceImpl implements ExampleService {
   @Override
   public Observable<List<String>> findAll() {
     logger.info("started");
-    Observable<List<String>> observable = new LookupCommand("Cornelius").toObservable();
+    Observable<List<String>> observable = new ExampleCommand("Cornelius").toObservable();
     logger.debug("done");
     return observable;
   }

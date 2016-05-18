@@ -14,11 +14,11 @@ import java.util.stream.IntStream;
 /**
  * Created by cjemison on 5/17/16. <p>aggregates GUIDS, nothing special</p>
  */
-public class LookupCommand extends HystrixCommand<List<String>> {
-  private final static Logger logger = LoggerFactory.getLogger(LookupCommand.class);
+public class ExampleCommand extends HystrixCommand<List<String>> {
+  private final static Logger logger = LoggerFactory.getLogger(ExampleCommand.class);
   private String name;
 
-  public LookupCommand(final String name) {
+  public ExampleCommand(final String name) {
     super(HystrixCommandGroupKey.Factory.asKey("ExampleGroup"));
     this.name = name;
   }
